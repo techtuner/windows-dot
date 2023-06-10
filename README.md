@@ -15,7 +15,7 @@ This is dotfiles for my Windows Machine
 - Run the command as an administrator
 ```powershell
 
-./setup.ps1
+.\setup.ps1
 
 ```
 
