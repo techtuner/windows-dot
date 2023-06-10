@@ -18,4 +18,4 @@
 - **Icons** : [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - **Popup in Neovim** : [popup.nvim](https://github.com/nvim-lua/popup.nvim)
 - **LSP Support** : [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim)
-- **Transparency Mode** : [transparent.nvim]([)](https://github.com/xiyaowong/transparent.nvim)
+- **Transparency Mode** : [transparent.nvim](https://github.com/xiyaowong/transparent.nvim)
