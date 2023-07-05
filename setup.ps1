@@ -8,20 +8,11 @@ function choco_packages() {
     }
 }
 
-function scoop_packages() {
-    scoop bucket add extras
-    sccop bucket add main
-    $scoop_apps = "main/git", "main/sudo", "main/nvm", "main/python", "main/pyenv", "main/go", "extras/brave", "extras/vlc", "extras/winrar", "main/wget", "main/curl", "main/cmake", "extras/lazygit", "extras/powertoys", "main/jq", "main/neovim", "main/gh", "main/rust", "main/rust-analyzer", "main/starship", "main/fzf", "extras/notion"
-
-    foreach ($app in $scoop_apps) {
-        scoop install $app
-    }
-}
-
 # Make Directories to store files
 mkdir ~\Documents\Powershell
 mkdir ~\.config\powershell
 mkdir D:\Projects
+mkdir D:\Notes
 
 $user = $env:USERNAME
 
@@ -37,67 +28,8 @@ Remove-Item $env:LOCALAPPDATA\nvim\neovim_setup.png
 Unblock-File -Path C:\Users\$user\.config\powershell\user_profile.ps1
 Unblock-File -Path C:\Users\$user\Documents\Powershell\Microsoft.PowerShell_profile.ps1
 
-
-## Installing package manager
-$pack_option = Read-Host -Prompt "Which pacakage manager do you want to install? 1.Choco 2.Scoop"
-
-if ($user -eq "Administrator" && $pack_option -eq 1) {
-    try {
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-        choco_packages
-
-    }
-    catch {
-        Write-Host "Choco Installation Error" -ForegroundColor Red
-        Invoke-RestMethod get.scoop.sh | Invoke-Expression
-        
-        scoop_packages
-    }
-}
-elseif ($user -eq "Administrator" && $pack_option -eq 2) {
-    try {
-        Invoke-Expression "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
-    }
-    catch {
-        Write-Host "Scoop Installation Error" -ForegroundColor Red
-        
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-        choco_packages
-    }
-
-}
-elseif ($pack_option -eq 1) {
-    try {
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-        choco_packages
-
-    }
-    catch {
-        Write-Host "Choco Installation Error" -ForegroundColor Red
-        Invoke-RestMethod get.scoop.sh | Invoke-Expression
-        
-        scoop_packages
-    }
-}
-else {
-    try {
-        Invoke-RestMethod get.scoop.sh | Invoke-Expression
-        
-        scoop_packages
-
-    }
-    catch {
-        Write-Host "Scoop Installation Error" -ForegroundColor Red
-
-        Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-        choco_packages
-    }
-}
-
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco_packages
 
 $extension_list = "formulahendry.auto-complete-tag",
 "formulahendry.auto-rename-tag",
